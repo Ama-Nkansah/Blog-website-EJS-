@@ -27,8 +27,17 @@
         </form>
 
         <h2>Latest Posts</h2>
-        <div id="postsGrid">
-            <!-- Posts will be dynamically rendered here -->
+         <div id="postsGrid">
+                <% if (posts.length > 0) { %>
+                    <% posts.forEach(post => { %>
+                        <div class="post">
+                            <h3><%= post.title %></h3>
+                            <p><%= post.content %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No posts yet. Create your first post!</p>
+                <% } %>
         </div>
     </main>
 
