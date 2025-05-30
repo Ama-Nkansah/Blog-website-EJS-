@@ -27,18 +27,27 @@
         </form>
 
         <h2>Latest Posts</h2>
-         <div id="postsGrid">
-                <% if (posts.length > 0) { %>
-                    <% posts.forEach(post => { %>
-                        <div class="post">
-                            <h3><%= post.title %></h3>
-                            <p><%= post.content %></p>
-                        </div>
-                    <% }) %>
-                <% } else { %>
-                    <p>No posts yet. Create your first post!</p>
-                <% } %>
+        <div id="postsGrid">
+            <% if (posts.length > 0) { %>
+                <% posts.forEach((post, index) => { %>
+                    <div class="post">
+                        <h3><%= post.title %></h3>
+                        <p><%= post.content %></p>
+                        <form action="/edit-post/<%= index %>" method="GET" style="display: inline;">
+                            <button type="submit" class="edit-button">Edit</button>
+                        </form>
+                        
+                        <form action="/delete-post" method="POST" style="margin-top: 10px;">
+                            <input type="hidden" name="index" value="<%= index %>">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No posts yet. Create your first post!</p>
+            <% } %>
         </div>
+        
     </main>
 
     <!-- Footer -->

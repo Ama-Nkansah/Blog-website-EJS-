@@ -27,6 +27,26 @@ app.post('/create-post', (req, res) => {
   res.redirect('/'); 
 });
 
+app.post('/delete-post', (req, res) => {
+  const { index } = req.body; 
+  posts.splice(index, 1); 
+  res.redirect('/'); 
+});
+
+app.get('/edit-post/:index', (req, res) => {
+  const index = req.params.index;
+  const post = posts[index]; 
+  res.render('edit', { index, post }); 
+});
+
+app.post('/update-post/:index', (req, res) => {
+  const index = req.params.index; 
+  const { title, content } = req.body; 
+  posts[index] = { title, content }; 
+  res.redirect('/'); 
+});
+
+
 app.listen(port, () => {
   console.log(`App listening on port ${port}`)
 })
